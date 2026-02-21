@@ -8,14 +8,19 @@ interface Props {
   whatsappMessage: string;
 }
 
-const { headline, subheadline, ctaText, trustBadge, whatsappNumber, whatsappMessage } = Astro.props;
-const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+const { headline, subheadline, ctaText, trustBadge } = Astro.props;
+// Split by *text* and mark segments as highlight or plain (odd indices = between asterisks)
+const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highlight: i % 2 === 1, text }));
 ---
 
 <section class="hero" id="hero">
   <div class="hero__wrap">
     <div class="hero__inner">
-      <h1 class="hero__headline">{headline}</h1>
+      <h1 class="hero__headline">
+        {headlineSegments.map((seg) =>
+          seg.highlight ? <span class="hero__headline-highlight">{seg.text}</span> : seg.text
+        )}
+      </h1>
       <p class="hero__subheadline">{subheadline}</p>
       <a class="btn btn--primary hero__cta" href="#contact">
         {ctaText}
@@ -185,6 +190,10 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${e
     color: var(--color-text);
     margin-bottom: var(--space-md);
     font-size: clamp(1.875rem, 5vw, 2.75rem);
+  }
+
+  .hero__headline-highlight {
+    color: var(--color-primary);
   }
 
   .hero__subheadline {
