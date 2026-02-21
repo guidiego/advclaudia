@@ -1,0 +1,70 @@
+---
+interface Props {
+  title: string;
+  items: Array<{ title: string; description: string }>;
+}
+
+const { title, items } = Astro.props;
+---
+
+<section class="practice-areas section" id="practice-areas">
+  <div class="container">
+    <h2 class="practice-areas__title">{title}</h2>
+    <div class="practice-areas__grid">
+      {items.map((item) => (
+        <article class="practice-areas__card">
+          <h3 class="practice-areas__card-title">{item.title}</h3>
+          <p class="practice-areas__card-desc">{item.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .practice-areas {
+    background-color: var(--color-bg-neutral);
+  }
+
+  .practice-areas__title {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .practice-areas__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .practice-areas__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .practice-areas__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .practice-areas__card {
+    padding: var(--space-lg);
+    background-color: #ffffff;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+    box-shadow: 0 2px 8px rgba(40, 35, 36, 0.04);
+  }
+
+  .practice-areas__card-title {
+    margin-bottom: var(--space-xs);
+    font-size: 1.125rem;
+  }
+
+  .practice-areas__card-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>

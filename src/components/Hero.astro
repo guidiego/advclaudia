@@ -1,0 +1,207 @@
+---
+interface Props {
+  headline: string;
+  subheadline: string;
+  ctaText: string;
+  trustBadge: string;
+  whatsappNumber: string;
+  whatsappMessage: string;
+}
+
+const { headline, subheadline, ctaText, trustBadge, whatsappNumber, whatsappMessage } = Astro.props;
+const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<section class="hero" id="hero">
+  <div class="hero__wrap">
+    <div class="hero__inner">
+      <h1 class="hero__headline">{headline}</h1>
+      <p class="hero__subheadline">{subheadline}</p>
+      <a class="btn btn--primary hero__cta" href="#contact">
+        {ctaText}
+      </a>
+      <p class="hero__badge">{trustBadge}</p>
+    </div>
+    <div class="hero__media" aria-hidden="true">
+      <img
+        src="/hero.png"
+        alt=""
+        class="hero__img"
+        id="hero-parallax-img"
+        width="480"
+        height="640"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<script>
+  const img = document.getElementById("hero-parallax-img");
+  const hero = document.getElementById("hero");
+  if (img && hero) {
+    let ticking = false;
+    const rate = 0.12;
+    const scaleEnd = 0.18;
+    function update() {
+      const rect = hero.getBoundingClientRect();
+      const heroHeight = hero.offsetHeight;
+      const scrollProgress = rect.bottom <= window.innerHeight
+        ? Math.min(1, (window.innerHeight - rect.bottom) / Math.max(1, heroHeight * 0.5))
+        : 0;
+      const centerY = rect.top + rect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+      const offset = (centerY - viewportCenter) * rate;
+      const scale = 1 + scrollProgress * scaleEnd;
+      img.style.transform = `translateY(${offset}px) scale(${scale})`;
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+  }
+</script>
+
+<style>
+  .hero {
+    --header-height: 3rem;
+    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100dvh - var(--header-height));
+    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--header-height));
+    padding: var(--space-sm) var(--space-md) 0;
+    background-color: var(--color-bg-neutral);
+    overflow: visible;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 0;
+  }
+
+  .hero__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    flex: 1;
+    min-height: 0;
+    justify-content: flex-start;
+    margin: 0 auto;
+    max-width: var(--container-max);
+    padding: 0 var(--space-md) var(--space-md);
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__wrap {
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: stretch;
+      gap: 0;
+      max-width: var(--container-max);
+      padding: 0 var(--space-lg) var(--space-md);
+      margin: 0 auto;
+    }
+  }
+
+  .hero__inner {
+    text-align: left;
+    max-width: 32rem;
+    width: 100%;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__inner {
+      flex: 0 0 50%;
+      max-width: 50%;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--space-lg) var(--space-xl) var(--space-xl);
+      margin: 0 auto 0 0;
+      box-sizing: border-box;
+    }
+  }
+
+  .hero__media {
+    width: 100%;
+    max-width: 20rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 200px;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__media {
+      flex: 0 0 50%;
+      max-width: 50%;
+      width: 50%;
+      min-height: 0;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0 var(--space-lg) 0 var(--space-md);
+      box-sizing: border-box;
+    }
+  }
+
+  .hero__img {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    object-fit: contain;
+    object-position: bottom center;
+    will-change: transform;
+    display: block;
+    vertical-align: bottom;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__img {
+      position: relative;
+      bottom: -40px;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      object-position: bottom right;
+      align-self: flex-end;
+      transform-origin: bottom right;
+    }
+  }
+
+  .hero__headline {
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+    font-size: clamp(1.875rem, 5vw, 2.75rem);
+  }
+
+  .hero__subheadline {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__cta {
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__badge {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+</style>

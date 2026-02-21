@@ -1,0 +1,86 @@
+{
+  "nav": {
+    "links": [
+      { "label": "Início", "href": "#hero" },
+      { "label": "Sobre", "href": "#about" },
+      { "label": "Áreas", "href": "#practice-areas" },
+      { "label": "Diferenciais", "href": "#differentiators" },
+      { "label": "Contato", "href": "#contact" }
+    ]
+  },
+  "seo": {
+    "title": "Advogada Especialista em Direito Penal em Mogi das Cruzes",
+    "description": "Advogada especialista em Direito Penal em São Paulo. Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
+    "area": "Direito Penal",
+    "city": "Mogi das Cruzes"
+  },
+  "contact": {
+    "whatsappNumber": "5511999999999",
+    "whatsappMessage": "Olá! Gostaria de agendar uma consulta e tirar algumas dúvidas.",
+    "phone": "(11) 99999-9999",
+    "email": "contato@exemplo.com.br",
+    "city": "Mogi das Cruzes",
+    "oab": "OAB/SP 531113",
+    "lawyerName": "Dra. Claudia Silva"
+  },
+  "hero": {
+    "headline": "Protegendo direitos com precisão jurídica",
+    "subheadline": "Advogada Especialista em Direito Penal em Mogi das Cruzes com foco em resultados. Atendimento humanizado e compromisso com a sua causa.",
+    "ctaText": "Quero ajuda de uma advogada especialista",
+    "trustBadge": "OAB/SP 531113 • Claudia Freire"
+  },
+  "sobre": {
+    "title": "Sobre",
+    "bio": "Advogada com mais de 15 anos de atuação em Direito Penal, atuando em São Paulo e região. Especialização em causas complexas, com foco em soluções estratégicas e atendimento personalizado. Comprometida com a ética, o sigilo e a agilidade que seu caso merece. Sua causa é tratada com a seriedade e a dedicação necessárias para o melhor desfecho.",
+    "ctaText": "Fale comigo pelo WhatsApp"
+  },
+  "areas": {
+    "title": "Áreas de Atuação",
+    "items": [
+      {
+        "title": "Direito Contratual",
+        "description": "Análise, revisão e elaboração de contratos. Resolução de conflitos e defesa dos seus interesses em negociações e litígios."
+      },
+      {
+        "title": "Direito das Famílias e Sucessões",
+        "description": "Divórcio, inventário, partilha de bens, pensão alimentícia e demais questões familiares e sucessionais com discrição e eficácia."
+      },
+      {
+        "title": "Direito Imobiliário",
+        "description": "Compra e venda, locação, usucapião e regularização de imóveis. Assessoria completa para sua segurança jurídica."
+      },
+      {
+        "title": "Responsabilidade Penal",
+        "description": "Indenizações, danos morais e materiais. Atuação para reparação de prejuízos e reconhecimento de seus direitos."
+      }
+    ],
+    "ctaText": "Quero falar com um especialista"
+  },
+  "diferenciais": {
+    "title": "Diferenciais",
+    "items": [
+      {
+        "title": "Atendimento personalizado",
+        "description": "Cada caso recebe a atenção e o planejamento que merece."
+      },
+      {
+        "title": "Estratégia jurídica sob medida",
+        "description": "Soluções pensadas para o seu objetivo e realidade."
+      },
+      {
+        "title": "Sigilo absoluto",
+        "description": "Seus dados e sua história são tratados com total confidencialidade."
+      },
+      {
+        "title": "Atuação ágil e eficaz",
+        "description": "Celeridade sem abrir mão da qualidade e da segurança jurídica."
+      }
+    ]
+  },
+  "contato": {
+    "title": "Entre em contato",
+    "subtitle": "Sua situação merece uma resposta rápida e profissional. Envie sua mensagem ou fale diretamente pelo WhatsApp para agendar uma consulta.",
+    "formSubmitText": "Solicitar Atendimento",
+    "whatsappButtonText": "Falar pelo WhatsApp"
+  }
+}

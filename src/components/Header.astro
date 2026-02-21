@@ -1,0 +1,257 @@
+---
+interface Props {
+  links: Array<{ label: string; href: string }>;
+}
+
+const { links } = Astro.props;
+---
+
+<header class="header" id="site-header">
+  <div class="header__container">
+    <a class="header__logo" href="#hero" aria-label="Home">
+      <img src="/logo.png" alt="Claudia Freire" class="header__logo-img" width="160" height="40" />
+    </a>
+    <button
+      class="header__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Open navigation menu"
+    >
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+      <span class="header__toggle-bar" aria-hidden="true"></span>
+    </button>
+    <nav class="header__nav" id="nav-menu" aria-label="Main navigation">
+      <ul class="header__list">
+        {links.map((link) => (
+          <li class="header__item">
+            <a class="header__link" href={link.href}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const toggle = header?.querySelector(".header__toggle");
+  const nav = document.getElementById("nav-menu");
+
+  function closeMenu() {
+    toggle?.setAttribute("aria-expanded", "false");
+    nav?.classList.remove("header__nav--open");
+    document.body.style.overflow = "";
+  }
+
+  function openMenu() {
+    toggle?.setAttribute("aria-expanded", "true");
+    nav?.classList.add("header__nav--open");
+    document.body.style.overflow = "hidden";
+  }
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    if (open) closeMenu();
+    else openMenu();
+  });
+
+  nav?.querySelectorAll(".header__link").forEach((link) => {
+    link.addEventListener("click", () => closeMenu());
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // Header border only after scroll (blend with hero when at top)
+  const hero = document.getElementById("hero");
+  function updateHeaderScroll() {
+    if (!header || !hero) return;
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    header.classList.toggle("header--scrolled", heroBottom < 60);
+  }
+  window.addEventListener("scroll", updateHeaderScroll, { passive: true });
+  updateHeaderScroll();
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--color-bg-neutral);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .header.header--scrolled {
+    border-bottom-color: var(--color-border);
+  }
+
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0.5rem var(--space-md);
+    gap: var(--space-xs);
+    min-height: 2.75rem;
+  }
+
+  @media (min-width: 48rem) {
+    .header__container {
+      padding: 0.5rem var(--space-lg);
+      min-height: 3rem;
+    }
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    line-height: 0;
+  }
+
+  .header__logo-img {
+    display: block;
+    height: 2rem;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  @media (min-width: 48rem) {
+    .header__logo-img {
+      height: 2.25rem;
+      max-width: 200px;
+    }
+  }
+
+  .header__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius);
+    color: var(--color-text);
+    transition: background-color var(--transition);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .header__toggle:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  @media (min-width: 48rem) {
+    .header__toggle {
+      display: none;
+    }
+  }
+
+  .header__toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 199;
+    background: var(--color-bg-neutral);
+    padding: 4.5rem var(--space-lg) var(--space-xl);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+    overflow-y: auto;
+  }
+
+  .header__nav--open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (min-width: 48rem) {
+    .header__nav {
+      position: static;
+      background: transparent;
+      padding: 0;
+      visibility: visible;
+      opacity: 1;
+      overflow-y: visible;
+    }
+  }
+
+  .header__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .header__list {
+      flex-direction: row;
+      gap: var(--space-lg);
+    }
+  }
+
+  .header__link {
+    display: block;
+    padding: var(--space-sm) 0;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition);
+    border-bottom: 2px solid transparent;
+  }
+
+  .header__link:hover {
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 48rem) {
+    .header__link {
+      padding: var(--space-xs) 0;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .header__link:hover {
+      color: var(--color-text);
+      border-bottom-color: var(--color-primary);
+    }
+  }
+</style>

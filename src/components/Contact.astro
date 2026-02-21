@@ -1,0 +1,153 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  formSubmitText: string;
+  whatsappButtonText: string;
+  whatsappNumber: string;
+  whatsappMessage: string;
+  lawyerName: string;
+  oab: string;
+  city: string;
+  phone: string;
+  email: string;
+}
+
+const { title, subtitle, formSubmitText, whatsappButtonText, whatsappNumber, whatsappMessage, lawyerName, oab, city, phone, email } = Astro.props;
+const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<section class="contact section" id="contact">
+  <div class="container contact__container">
+    <header class="contact__header">
+      <h2 class="contact__title">{title}</h2>
+      <p class="contact__subtitle">{subtitle}</p>
+    </header>
+
+    <div class="contact__content">
+      <form
+        class="contact__form"
+        id="contact-form"
+        method="post"
+        action="#"
+        data-whatsapp-number={whatsappNumber.replace(/\D/g, "")}
+      >
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your full name" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required placeholder="(11) 99999-9999" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Briefly describe your case..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--white contact__submit">
+          {formSubmitText}
+        </button>
+      </form>
+
+      <a class="btn btn--whatsapp contact__whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+        {whatsappButtonText}
+      </a>
+    </div>
+
+    <footer class="contact__footer">
+      <img src="/footer.png" alt="Claudia Freire Advocacia" class="contact__footer-img" width="240" height="120" loading="lazy" />
+    </footer>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const num = form.dataset.whatsappNumber;
+      const nameVal = (form.querySelector('[name="name"]') as HTMLInputElement)?.value ?? "";
+      const phoneVal = (form.querySelector('[name="phone"]') as HTMLInputElement)?.value ?? "";
+      const emailVal = (form.querySelector('[name="email"]') as HTMLInputElement)?.value ?? "";
+      const messageVal = (form.querySelector('[name="message"]') as HTMLTextAreaElement)?.value ?? "";
+      const text = `Hello! I would like to request a consultation.\n\nName: ${nameVal}\nPhone: ${phoneVal}\nEmail: ${emailVal}\n\nMessage: ${messageVal}`;
+      window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, "_blank");
+    });
+  }
+</script>
+
+<style>
+  .contact {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+
+  .contact__container {
+    max-width: 32rem;
+  }
+
+  .contact__header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .contact__title {
+    color: var(--color-text-on-dark);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact__subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .contact__content {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .contact__form .form-group input,
+  .contact__form .form-group textarea {
+    background: var(--color-primary-light);
+    border-color: var(--color-navy-muted);
+    color: var(--color-text-on-dark);
+  }
+
+  .contact__form .form-group input::placeholder,
+  .contact__form .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .contact__form .form-group label {
+    color: var(--color-text-on-dark);
+  }
+
+  .contact__submit {
+    width: 100%;
+    margin-top: var(--space-sm);
+  }
+
+  .contact__whatsapp {
+    width: 100%;
+    margin-top: var(--space-md);
+    display: inline-flex;
+  }
+
+  .contact__footer {
+    text-align: center;
+    padding-top: var(--space-xl);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .contact__footer-img {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    margin: 0 auto;
+  }
+</style>

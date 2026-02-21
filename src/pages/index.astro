@@ -1,17 +1,61 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import PracticeAreas from "../components/PracticeAreas.astro";
+import Differentiators from "../components/Differentiators.astro";
+import Contact from "../components/Contact.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import Header from "../components/Header.astro";
+import site from "../data/site.json";
 
+const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title={seo.title}
+  description={seo.description}
+  area={seo.area}
+  city={seo.city}
+  lawyerName={contact.lawyerName}
+  phone={contact.phone}
+  email={contact.email}
+>
+  <Header links={nav.links} />
+  <main id="main-content">
+    <Hero
+      headline={hero.headline}
+      subheadline={hero.subheadline}
+      ctaText={hero.ctaText}
+      trustBadge={hero.trustBadge}
+      whatsappNumber={contact.whatsappNumber}
+      whatsappMessage={contact.whatsappMessage}
+    />
+    <About
+      title={sobre.title}
+      bio={sobre.bio}
+    />
+    <PracticeAreas
+      title={areas.title}
+      items={areas.items}
+    />
+    <Differentiators title={diferenciais.title} items={diferenciais.items} />
+    <Contact
+      title={contato.title}
+      subtitle={contato.subtitle}
+      formSubmitText={contato.formSubmitText}
+      whatsappButtonText={contato.whatsappButtonText}
+      whatsappNumber={contact.whatsappNumber}
+      whatsappMessage={contact.whatsappMessage}
+      lawyerName={contact.lawyerName}
+      oab={contact.oab}
+      city={contact.city}
+      phone={contact.phone}
+      email={contact.email}
+    />
+  </main>
+  <WhatsAppFloat
+    whatsappNumber={contact.whatsappNumber}
+    whatsappMessage={contact.whatsappMessage}
+  />
+</Layout>

@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  area?: string;
+  city?: string;
+  /** For JSON-LD and og:image; leave empty to use canonical only */
+  lawyerName?: string;
+  phone?: string;
+  email?: string;
+}
+
+const { title, description, area = "", city = "", lawyerName = "", phone = "", email = "" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const jsonLd = lawyerName
+  ? {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      name: title,
+      description,
+      url: canonical,
+      areaServed: { "@type": "City", name: city },
+      ...(area && { serviceType: area }),
+      ...(phone && { telephone: phone }),
+      ...(email && { email }),
+    }
+  : null;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#481217" />
+    <!-- SEO: Advogado(a) [AREA] em [CITY] -->
+    {area && city && (
+      <meta name="keywords" content={`Advogado, Advogada, ${area}, ${city}, consultoria jurídica, escritório de advocacia`} />
+    )}
+    <meta name="robots" content="index, follow" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={lawyerName || title} />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <!-- JSON-LD structured data -->
+    {jsonLd && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, "<\\/script>")}
+      />
+    )}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=optional" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,100 @@
+---
+interface Props {
+  title: string;
+  bio: string;
+}
+
+const { title, bio } = Astro.props;
+---
+
+<section class="about section" id="about">
+  <div class="about__wrap">
+    <div class="about__media" aria-hidden="true">
+      <div class="about__placeholder"></div>
+    </div>
+    <div class="about__content">
+      <h2 class="about__title">{title}</h2>
+      <div class="about__bio">
+        {bio.split(/\n/).filter(Boolean).map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--color-bg-warm);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about__wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .about__wrap {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-xl);
+      padding: 0 var(--space-lg);
+    }
+  }
+
+  .about__media {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  @media (min-width: 48rem) {
+    .about__media {
+      width: 40%;
+      max-width: 20rem;
+    }
+  }
+
+  .about__placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: 280px;
+    background: var(--color-bg-neutral);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .about__placeholder {
+      max-height: 320px;
+    }
+  }
+
+  .about__content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .about__content {
+      flex: 0 1 58%;
+    }
+  }
+
+  .about__title {
+    margin-bottom: var(--space-xl);
+  }
+
+  .about__bio {
+    max-width: 38rem;
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+  }
+
+  .about__bio p {
+    margin-bottom: var(--space-sm);
+  }
+</style>
