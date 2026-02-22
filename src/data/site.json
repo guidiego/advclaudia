@@ -25,36 +25,20 @@
   },
   "hero": {
     "headline": "Protegendo direitos com *precisão jurídica*",
-    "subheadline": "Advogada Especialista em Direito Penal em Mogi das Cruzes com foco em resultados. Atendimento humanizado e compromisso com a sua causa.",
+    "subheadline": "Advogada Especialista em Direito Penal em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
     "ctaText": "Quero ajuda de uma advogada especialista",
     "trustBadge": "OAB/SP 531113 • Claudia Freire"
   },
   "sobre": {
     "title": "Sobre",
-    "bio": "Advogada com mais de 15 anos de atuação em Direito Penal, atuando em São Paulo e região. Especialização em causas complexas, com foco em soluções estratégicas e atendimento personalizado. Comprometida com a ética, o sigilo e a agilidade que seu caso merece. Sua causa é tratada com a seriedade e a dedicação necessárias para o melhor desfecho.",
+    "bio": [
+      "Nascida em 1970, Dra. Cláudia construiu sua trajetória com base em responsabilidade, determinação e compromisso social. Após dedicar-se à criação de suas duas filhas, decidiu iniciar um novo capítulo profissional ao ingressar no curso de Direito, motivada pelas desigualdades e injustiças que observou ao longo da vida. Aprovada no Exame da OAB, inicia sua atuação na advocacia com maturidade, sensibilidade e forte senso de propósito.",
+      "Optou pela advocacia criminal por compreender que o Direito Penal exige não apenas conhecimento técnico, mas também humanidade e equilíbrio. Acredita que todo cidadão tem direito a uma defesa justa e qualificada, especialmente aqueles que muitas vezes não são favorecidos pelo sistema. Sua atuação é pautada na ética, no respeito às garantias fundamentais e no compromisso genuíno com a Justiça."
+    ],
     "ctaText": "Fale comigo pelo WhatsApp"
   },
   "areas": {
-    "title": "Áreas de Atuação",
-    "items": [
-      {
-        "title": "Direito Contratual",
-        "description": "Análise, revisão e elaboração de contratos. Resolução de conflitos e defesa dos seus interesses em negociações e litígios."
-      },
-      {
-        "title": "Direito das Famílias e Sucessões",
-        "description": "Divórcio, inventário, partilha de bens, pensão alimentícia e demais questões familiares e sucessionais com discrição e eficácia."
-      },
-      {
-        "title": "Direito Imobiliário",
-        "description": "Compra e venda, locação, usucapião e regularização de imóveis. Assessoria completa para sua segurança jurídica."
-      },
-      {
-        "title": "Responsabilidade Penal",
-        "description": "Indenizações, danos morais e materiais. Atuação para reparação de prejuízos e reconhecimento de seus direitos."
-      }
-    ],
-    "ctaText": "Quero falar com um especialista"
+    "title": "Áreas de Atuação"
   },
   "diferenciais": {
     "title": "Diferenciais",
@@ -81,7 +65,7 @@
     "title": "Entre em contato",
     "subtitle": "Sua situação merece uma resposta rápida e profissional. Envie sua mensagem ou fale diretamente pelo WhatsApp para agendar uma consulta.",
     "formSubmitText": "Solicitar Atendimento",
-    "whatsappButtonText": "Falar pelo WhatsApp",
+    "whatsappButtonText": "Falar com a Dra. Claudia.",
     "formFields": {
       "name": { "label": "Nome", "placeholder": "Seu nome completo" },
       "phone": { "label": "Telefone", "placeholder": "(11) 99999-9999" },

@@ -16,12 +16,12 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
 <section class="hero" id="hero">
   <div class="hero__wrap">
     <div class="hero__inner">
-      <h1 class="hero__headline">
+      <p class="hero__headline">
         {headlineSegments.map((seg) =>
           seg.highlight ? <span class="hero__headline-highlight">{seg.text}</span> : seg.text
         )}
-      </h1>
-      <p class="hero__subheadline">{subheadline}</p>
+      </p>
+      <h1 class="hero__subheadline">{subheadline}</h1>
       <a class="btn btn--primary hero__cta" href="#contact">
         {ctaText}
       </a>

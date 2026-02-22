@@ -1,25 +1,189 @@
 ---
 interface Props {
   title: string;
-  items: Array<{ title: string; description: string }>;
+  whatsappNumber: string;
+  whatsappMessage: string;
+  loadMoreLabel?: string;
+  loadMoreCtaLabel?: string;
+  modalQuestion?: string;
+  modalNoLabel?: string;
+  modalYesLabel?: string;
 }
 
-const { title, items } = Astro.props;
+const { title, whatsappNumber, whatsappMessage, loadMoreLabel = "Carregar mais", loadMoreCtaLabel = "Entre em contato e vamos ver como podemos te ajudar", modalQuestion = "Quer entrar em contato para falar sobre", modalNoLabel = "Não", modalYesLabel = "Sim" } = Astro.props;
+
+import practiceAreasData from "../data/practice-areas.json";
+const areas = practiceAreasData as Array<{ title: string; description: string; specialization: boolean }>;
+const INITIAL_VISIBLE = 8;
+const LOAD_MORE_STEP = 4;
 ---
 
 <section class="practice-areas section" id="practice-areas">
   <div class="container">
     <h2 class="practice-areas__title">{title}</h2>
-    <div class="practice-areas__grid">
-      {items.map((item) => (
-        <article class="practice-areas__card">
+
+    <div class="practice-areas__search-wrap">
+      <label for="practice-areas-search" class="practice-areas__search-label">Buscar área</label>
+      <input
+        type="search"
+        id="practice-areas-search"
+        class="practice-areas__search"
+        placeholder="Ex.: habeas corpus, defesa, audiência..."
+        autocomplete="off"
+        aria-label="Filtrar áreas de atuação"
+      />
+    </div>
+
+    <div class="practice-areas__grid" id="practice-areas-grid">
+      {areas.map((item, index) => (
+        <article
+          class="practice-areas__card"
+          data-index={index}
+          data-title={item.title.toLowerCase()}
+          data-description={item.description.toLowerCase()}
+          data-area-title={item.title}
+          data-area-description={item.description}
+          tabindex="0"
+          role="button"
+        >
           <h3 class="practice-areas__card-title">{item.title}</h3>
           <p class="practice-areas__card-desc">{item.description}</p>
+          {item.specialization && (
+            <span class="practice-areas__badge" aria-label="Especialização">
+              <svg class="practice-areas__badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+              Especialização
+            </span>
+          )}
         </article>
       ))}
     </div>
+
+    <div class="practice-areas__actions">
+      <button type="button" class="btn btn--primary practice-areas__load-more" id="practice-areas-load-more" aria-live="polite">
+        {loadMoreLabel}
+      </button>
+      <a href="#contact" class="btn btn--primary practice-areas__cta practice-areas__cta--hidden" id="practice-areas-cta">
+        {loadMoreCtaLabel}
+      </a>
+    </div>
+  </div>
+
+  <div class="practice-areas__modal" id="practice-areas-modal" role="dialog" aria-modal="true" aria-labelledby="practice-areas-modal-title" hidden>
+    <div class="practice-areas__modal-backdrop" id="practice-areas-modal-backdrop"></div>
+    <div class="practice-areas__modal-box">
+      <p class="practice-areas__modal-question" id="practice-areas-modal-title"></p>
+      <div class="practice-areas__modal-actions">
+        <button type="button" class="practice-areas__modal-no" id="practice-areas-modal-no">{modalNoLabel}</button>
+        <a href="#" class="btn btn--primary practice-areas__modal-yes" id="practice-areas-modal-yes" target="_blank" rel="noopener noreferrer">{modalYesLabel}</a>
+      </div>
+    </div>
   </div>
 </section>
+
+<script define:vars={{ whatsappNumber, whatsappMessage, modalQuestion, INITIAL_VISIBLE, LOAD_MORE_STEP }}>
+  const grid = document.getElementById("practice-areas-grid");
+  const searchInput = document.getElementById("practice-areas-search");
+  const loadMoreBtn = document.getElementById("practice-areas-load-more");
+  const ctaLink = document.getElementById("practice-areas-cta");
+  const modal = document.getElementById("practice-areas-modal");
+  const modalTitle = document.getElementById("practice-areas-modal-title");
+  const modalNo = document.getElementById("practice-areas-modal-no");
+  const modalYes = document.getElementById("practice-areas-modal-yes");
+  const modalBackdrop = document.getElementById("practice-areas-modal-backdrop");
+
+  if (!grid || !searchInput || !loadMoreBtn || !ctaLink || !modal || !modalTitle || !modalNo || !modalYes || !modalBackdrop) throw new Error("Practice areas: missing elements");
+
+  const cards = Array.from(grid.querySelectorAll(".practice-areas__card"));
+  const totalCards = cards.length;
+
+  let visibleCount = INITIAL_VISIBLE;
+  let searchQuery = "";
+
+  function getMatchingCards() {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return cards;
+    return cards.filter((card) => {
+      const title = (card.dataset.title || "").normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      const desc = (card.dataset.description || "").normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      const term = q.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+      return title.includes(term) || desc.includes(term);
+    });
+  }
+
+  function updateVisibility() {
+    const matching = getMatchingCards();
+    const maxVisible = Math.min(visibleCount, matching.length);
+
+    cards.forEach((card) => {
+      const isMatch = matching.includes(card);
+      const indexInMatch = matching.indexOf(card);
+      const shouldShow = isMatch && indexInMatch < maxVisible;
+      card.classList.toggle("practice-areas__card--hidden", !shouldShow);
+      card.classList.toggle("practice-areas__card--no-match", !isMatch);
+    });
+
+    const allMatchingVisible = maxVisible >= matching.length;
+    loadMoreBtn.classList.toggle("practice-areas__load-more--hidden", allMatchingVisible || matching.length === 0);
+    ctaLink.classList.toggle("practice-areas__cta--hidden", !allMatchingVisible || matching.length === 0);
+
+    if (matching.length === 0) {
+      loadMoreBtn.classList.add("practice-areas__load-more--hidden");
+      ctaLink.classList.remove("practice-areas__cta--hidden");
+    }
+  }
+
+  function onLoadMore() {
+    visibleCount += LOAD_MORE_STEP;
+    updateVisibility();
+  }
+
+  function onSearch() {
+    searchQuery = searchInput.value;
+    visibleCount = INITIAL_VISIBLE;
+    updateVisibility();
+  }
+
+  function openModal(card) {
+    const areaTitle = card.dataset.areaTitle || "";
+    modalTitle.textContent = `${modalQuestion} ${areaTitle}?`;
+    const baseUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
+    const text = encodeURIComponent(`${whatsappMessage} (Assunto: ${areaTitle})`);
+    modalYes.href = `${baseUrl}?text=${text}`;
+    modal.hidden = false;
+    modalNo.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+  }
+
+  loadMoreBtn.addEventListener("click", onLoadMore);
+  searchInput.addEventListener("input", onSearch);
+  searchInput.addEventListener("search", onSearch);
+
+  modalNo.addEventListener("click", closeModal);
+  modalBackdrop.addEventListener("click", closeModal);
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if (card.classList.contains("practice-areas__card--no-match")) return;
+      openModal(card);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (!card.classList.contains("practice-areas__card--no-match")) openModal(card);
+      }
+    });
+  });
+
+  updateVisibility();
+</script>
 
 <style>
   .practice-areas {
@@ -28,12 +192,40 @@ const { title, items } = Astro.props;
 
   .practice-areas__title {
     text-align: center;
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-areas__search-wrap {
+    max-width: 24rem;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .practice-areas__search-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .practice-areas__search {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+
+  .practice-areas__search:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 
   .practice-areas__grid {
     display: grid;
     gap: var(--space-lg);
+    grid-template-columns: 1fr;
   }
 
   @media (min-width: 48rem) {
@@ -55,16 +247,133 @@ const { title, items } = Astro.props;
     border: 1px solid var(--color-border);
     border-left: 3px solid var(--color-primary);
     box-shadow: 0 2px 8px rgba(40, 35, 36, 0.04);
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+
+  .practice-areas__card:hover {
+    box-shadow: 0 4px 16px rgba(40, 35, 36, 0.08);
+  }
+
+  .practice-areas__card:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .practice-areas__card--hidden,
+  .practice-areas__card--no-match {
+    display: none !important;
+  }
+
+  .practice-areas__badge {
+    position: absolute;
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background-color: #f5e6a3;
+    color: var(--color-gold-dark);
+    border-radius: var(--radius);
+  }
+
+  .practice-areas__badge-icon {
+    flex-shrink: 0;
+    color: var(--color-gold-dark);
   }
 
   .practice-areas__card-title {
     margin-bottom: var(--space-xs);
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
   }
 
   .practice-areas__card-desc {
     font-size: 0.9375rem;
     color: var(--color-text-muted);
     margin: 0;
+    line-height: 1.5;
+  }
+
+  .practice-areas__actions {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .practice-areas__load-more,
+  .practice-areas__cta {
+    min-width: 16rem;
+  }
+
+  .practice-areas__load-more--hidden,
+  .practice-areas__cta--hidden {
+    display: none !important;
+  }
+
+  .practice-areas__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+  }
+
+  .practice-areas__modal[hidden] {
+    display: none;
+  }
+
+  .practice-areas__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .practice-areas__modal-box {
+    position: relative;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    max-width: 24rem;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .practice-areas__modal-question {
+    font-size: 1.125rem;
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text);
+  }
+
+  .practice-areas__modal-actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: flex-end;
+  }
+
+  .practice-areas__modal-no {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 1rem;
+    font-family: inherit;
+    background: #fff;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .practice-areas__modal-no:hover {
+    background: var(--color-bg-neutral);
+  }
+
+  .practice-areas__modal-yes {
+    padding: var(--space-sm) var(--space-lg);
   }
 </style>

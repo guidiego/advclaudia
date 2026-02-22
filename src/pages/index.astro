@@ -37,23 +37,16 @@ const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
     />
     <PracticeAreas
       title={areas.title}
-      items={areas.items}
+      whatsappNumber={contact.whatsappNumber}
+      whatsappMessage={contact.whatsappMessage}
     />
     <Differentiators title={diferenciais.title} items={diferenciais.items} />
     <Contact
       title={contato.title}
       subtitle={contato.subtitle}
-      formSubmitText={contato.formSubmitText}
       whatsappButtonText={contato.whatsappButtonText}
       whatsappNumber={contact.whatsappNumber}
       whatsappMessage={contact.whatsappMessage}
-      lawyerName={contact.lawyerName}
-      oab={contact.oab}
-      city={contact.city}
-      phone={contact.phone}
-      email={contact.email}
-      formFields={contato.formFields}
-      formWhatsappIntro={contato.formWhatsappIntro}
     />
   </main>
   <WhatsAppFloat
