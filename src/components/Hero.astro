@@ -29,7 +29,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
     </div>
     <div class="hero__media" aria-hidden="true">
       <img
-        src="/hero.png"
+        src={`${import.meta.env.BASE_URL}hero.png`}
         alt=""
         class="hero__img"
         id="hero-parallax-img"
@@ -140,16 +140,12 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
   }
 
   .hero__media {
-    width: 100%;
-    max-width: 20rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    min-height: 200px;
+    display: none; /* hidden on mobile */
   }
 
   @media (min-width: 48rem) {
     .hero__media {
+      display: flex;
       flex: 0 0 50%;
       max-width: 50%;
       width: 50%;

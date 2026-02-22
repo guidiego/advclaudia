@@ -10,7 +10,7 @@
   },
   "seo": {
     "title": "Advogada Especialista em Direito Penal em Mogi das Cruzes",
-    "description": "Advogada especialista em Direito Penal em São Paulo. Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
+    "description": "Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
     "area": "Direito Penal",
     "city": "Mogi das Cruzes"
   },
@@ -81,6 +81,13 @@
     "title": "Entre em contato",
     "subtitle": "Sua situação merece uma resposta rápida e profissional. Envie sua mensagem ou fale diretamente pelo WhatsApp para agendar uma consulta.",
     "formSubmitText": "Solicitar Atendimento",
-    "whatsappButtonText": "Falar pelo WhatsApp"
+    "whatsappButtonText": "Falar pelo WhatsApp",
+    "formFields": {
+      "name": { "label": "Nome", "placeholder": "Seu nome completo" },
+      "phone": { "label": "Telefone", "placeholder": "(11) 99999-9999" },
+      "email": { "label": "E-mail", "placeholder": "seu@email.com" },
+      "message": { "label": "Mensagem", "placeholder": "Descreva brevemente seu caso..." }
+    },
+    "formWhatsappIntro": "Olá! Gostaria de solicitar uma consulta."
   }
 }

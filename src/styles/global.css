@@ -298,6 +298,7 @@ p:last-child {
 }
 
 .whatsapp-float:hover {
+  color: var(--color-text-on-dark); /* keep icon white on hover */
   transform: scale(1.08);
   box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
 }

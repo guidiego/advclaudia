@@ -9,7 +9,7 @@ const { links } = Astro.props;
 <header class="header" id="site-header">
   <div class="header__container">
     <a class="header__logo" href="#hero" aria-label="Home">
-      <img src="/logo.png" alt="Claudia Freire" class="header__logo-img" width="160" height="40" />
+      <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Claudia Freire" class="header__logo-img" width="160" height="40" />
     </a>
     <button
       class="header__toggle"
