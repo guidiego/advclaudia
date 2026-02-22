@@ -62,10 +62,13 @@ const jsonLd = lawyerName
         set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, "<\\/script>")}
       />
     )}
-    <!-- Fonts -->
+    <!-- LCP: preload hero image so it starts loading before body is parsed -->
+    <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}hero.png`} />
+    <!-- Fonts: preconnect first; stylesheet loads async (media=print trick) so it doesn't block render -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=optional" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
     <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon-96x96.png`} sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <link rel="shortcut icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />

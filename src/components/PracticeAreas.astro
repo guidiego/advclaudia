@@ -13,7 +13,9 @@ interface Props {
 const { title, whatsappNumber, whatsappMessage, loadMoreLabel = "Carregar mais", loadMoreCtaLabel = "Entre em contato e vamos ver como podemos te ajudar", modalQuestion = "Quer entrar em contato para falar sobre", modalNoLabel = "Não", modalYesLabel = "Sim" } = Astro.props;
 
 import practiceAreasData from "../data/practice-areas.json";
-const areas = practiceAreasData as Array<{ title: string; description: string; specialization: boolean }>;
+const areas = ([...practiceAreasData] as Array<{ title: string; description: string; specialization: boolean }>).sort(
+  (a, b) => Number(b.specialization) - Number(a.specialization)
+);
 const INITIAL_VISIBLE = 8;
 const LOAD_MORE_STEP = 4;
 ---

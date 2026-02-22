@@ -26,7 +26,7 @@
   "hero": {
     "headline": "Protegendo direitos com *precisão jurídica*",
     "subheadline": "Advogada Especialista em Direito Penal em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
-    "ctaText": "Quero ajuda de uma advogada especialista",
+    "ctaText": "Conversar com a advogada",
     "trustBadge": "OAB/SP 531113 • Claudia Freire"
   },
   "sobre": {
@@ -44,20 +44,24 @@
     "title": "Diferenciais",
     "items": [
       {
-        "title": "Atendimento personalizado",
-        "description": "Cada caso recebe a atenção e o planejamento que merece."
+        "title": "Atendimento Personalizado e Próximo",
+        "description": "Cada cliente é único. Estou disponível para entender seu caso de forma detalhada e oferecer soluções jurídicas sob medida, com atenção total e comunicação clara.",
+        "icon": "personal"
       },
       {
-        "title": "Estratégia jurídica sob medida",
-        "description": "Soluções pensadas para o seu objetivo e realidade."
+        "title": "Atualizada e Preparada nas Novas Leis",
+        "description": "Recém-aprovada na OAB, trago conhecimento atualizado das legislações e jurisprudências mais recentes para oferecer estratégias jurídicas modernas e eficazes.",
+        "icon": "law"
       },
       {
-        "title": "Sigilo absoluto",
-        "description": "Seus dados e sua história são tratados com total confidencialidade."
+        "title": "Transparência, Honestidade e Sigilo Profissional",
+        "description": "Compromisso com a transparência: explico claramente seus direitos, possibilidades e riscos, sem prometer resultados impossíveis. Todas as informações compartilhadas são tratadas com total sigilo e respeito à sua privacidade.",
+        "icon": "shield"
       },
       {
-        "title": "Atuação ágil e eficaz",
-        "description": "Celeridade sem abrir mão da qualidade e da segurança jurídica."
+        "title": "Flexibilidade e Acessibilidade",
+        "description": "Disponível para consultas presenciais e online, com horários adaptáveis à sua rotina, buscando sempre facilitar o acesso à justiça.",
+        "icon": "flexibility"
       }
     ]
   },

@@ -8,4 +8,10 @@ const base = process.env.BASE_PATH || '/';
 export default defineConfig({
   site: process.env.GITHUB_PAGES === 'true' ? `https://${process.env.GITHUB_REPOSITORY_OWNER || 'github'}.github.io` : 'https://example.com',
   base,
+  build: {
+    // Inline small CSS into HTML to reduce requests and speed first paint
+    inlineStylesheets: 'auto',
+    // Minify HTML output for smaller payload
+    compressHTML: true,
+  },
 });

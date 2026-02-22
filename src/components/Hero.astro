@@ -36,6 +36,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
         width="480"
         height="640"
         fetchpriority="high"
+        decoding="async"
       />
     </div>
   </div>
@@ -48,6 +49,8 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
     let ticking = false;
     const rate = 0.12;
     const scaleEnd = 0.18;
+    const bottomStart = -15;
+    const bottomEnd = -160;
     function update() {
       const rect = hero.getBoundingClientRect();
       const heroHeight = hero.offsetHeight;
@@ -58,6 +61,8 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
       const viewportCenter = window.innerHeight / 2;
       const offset = (centerY - viewportCenter) * rate;
       const scale = 1 + scrollProgress * scaleEnd;
+      const bottom = bottomStart + scrollProgress * (bottomEnd - bottomStart);
+      img.style.bottom = `${bottom}px`;
       img.style.transform = `translateY(${offset}px) scale(${scale})`;
       ticking = false;
     }
@@ -75,13 +80,13 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
 <style>
   .hero {
     --header-height: 3rem;
-    height: calc(100vh - var(--header-height));
-    height: calc(100dvh - var(--header-height));
+    --hero-peek: 4rem;
+    /* Mobile: full screen (viewport minus header) */
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100dvh - var(--header-height));
-    max-height: calc(100vh - var(--header-height));
-    max-height: calc(100dvh - var(--header-height));
-    padding: var(--space-sm) var(--space-md) 0;
+    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    padding: var(--space-sm) var(--space-sm) 0 var(--space-sm);
     background-color: var(--color-bg-neutral);
     overflow: visible;
     box-sizing: border-box;
@@ -91,6 +96,17 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
     z-index: 0;
   }
 
+  @media (min-width: 48rem) {
+    .hero {
+      height: calc(100vh - var(--header-height) - var(--hero-peek));
+      height: calc(100dvh - var(--header-height) - var(--hero-peek));
+      min-height: calc(100vh - var(--header-height) - var(--hero-peek));
+      min-height: calc(100dvh - var(--header-height) - var(--hero-peek));
+      max-height: calc(100vh - var(--header-height) - var(--hero-peek));
+      max-height: calc(100dvh - var(--header-height) - var(--hero-peek));
+    }
+  }
+
   .hero__wrap {
     display: flex;
     flex-direction: column;
@@ -98,10 +114,10 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
     gap: var(--space-lg);
     flex: 1;
     min-height: 0;
-    justify-content: flex-start;
+    justify-content: center; /* mobile: center content vertically in viewport */
     margin: 0 auto;
     max-width: var(--container-max);
-    padding: 0 var(--space-md) var(--space-md);
+    padding: 0 var(--space-md) var(--space-md) var(--space-sm);
     box-sizing: border-box;
     position: relative;
     overflow: visible;
@@ -114,7 +130,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
       justify-content: stretch;
       gap: 0;
       max-width: var(--container-max);
-      padding: 0 var(--space-lg) var(--space-md);
+      padding: 0 var(--space-sm) var(--space-md) var(--space-sm);
       margin: 0 auto;
     }
   }
@@ -133,7 +149,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 var(--space-lg) var(--space-xl) var(--space-xl);
+      padding: 0 var(--space-lg) var(--space-xl) var(--space-sm);
       margin: 0 auto 0 0;
       box-sizing: border-box;
     }
@@ -152,7 +168,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
       min-height: 0;
       align-items: flex-end;
       justify-content: flex-end;
-      padding: 0 var(--space-lg) 0 var(--space-md);
+      padding: 0 var(--space-xs) 0 var(--space-sm);
       box-sizing: border-box;
     }
   }
@@ -171,7 +187,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
   @media (min-width: 48rem) {
     .hero__img {
       position: relative;
-      bottom: -40px;
+      bottom: -15px;
       max-height: 90vh;
       width: auto;
       height: auto;
@@ -185,7 +201,8 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
   .hero__headline {
     color: var(--color-text);
     margin-bottom: var(--space-md);
-    font-size: clamp(1.875rem, 5vw, 2.75rem);
+    font-size: clamp(2.5rem, 6vw, 3rem);
+    font-weight: 600;
   }
 
   .hero__headline-highlight {
@@ -195,6 +212,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
   .hero__subheadline {
     font-size: 1.0625rem;
     line-height: 1.65;
+    font-weight: 500;
     color: var(--color-text-muted);
     margin-bottom: var(--space-xl);
   }

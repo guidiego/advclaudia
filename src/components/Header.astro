@@ -7,9 +7,9 @@ const { links } = Astro.props;
 ---
 
 <header class="header" id="site-header">
-  <div class="header__container">
+  <div class="container header__container">
     <a class="header__logo" href="#hero" aria-label="Home">
-      <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Claudia Freire" class="header__logo-img" width="160" height="40" />
+      <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Claudia Freire" class="header__logo-img" width="160" height="40" fetchpriority="high" decoding="async" />
     </a>
     <button
       class="header__toggle"
@@ -94,16 +94,14 @@ const { links } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0.5rem var(--space-md);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     gap: var(--space-xs);
     min-height: 2.75rem;
   }
 
   @media (min-width: 48rem) {
     .header__container {
-      padding: 0.5rem var(--space-lg);
       min-height: 3rem;
     }
   }
