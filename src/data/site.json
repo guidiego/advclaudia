@@ -3,13 +3,13 @@
     "links": [
       { "label": "Início", "href": "#hero" },
       { "label": "Sobre", "href": "#about" },
-      { "label": "Áreas", "href": "#practice-areas" },
+      { "label": "Áreas de Atuação", "href": "#practice-areas" },
       { "label": "Diferenciais", "href": "#differentiators" },
       { "label": "Contato", "href": "#contact" }
     ]
   },
   "seo": {
-    "title": "Advogada Especialista em Direito Penal em Mogi das Cruzes",
+    "title": "Advogada especialista em Direito Penal e Processo Penal em Mogi das Cruzes",
     "description": "Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
     "area": "Direito Penal e Processo Penal",
     "city": "Mogi das Cruzes"
@@ -25,7 +25,7 @@
   },
   "hero": {
     "headline": "Protegendo direitos com *precisão jurídica*",
-    "subheadline": "Advogada Especialista em Direito Penal e Processo Penal em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
+    "subheadline": "Advogada especialista em Direito Penal e Processo Penal em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
     "ctaText": "Conversar com a advogada",
     "trustBadge": "OAB/SP 531113 • Claudia Freire"
   },

@@ -80,8 +80,7 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
 <style>
   .hero {
     --header-height: 3rem;
-    --hero-peek: 4rem;
-    /* Mobile: full screen (viewport minus header) */
+    /* Full viewport minus header on all screen sizes */
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100dvh - var(--header-height));
     height: calc(100vh - var(--header-height));
@@ -94,17 +93,6 @@ const headlineSegments = headline.split(/\*([^*]+)\*/).map((text, i) => ({ highl
     flex-direction: column;
     position: relative;
     z-index: 0;
-  }
-
-  @media (min-width: 48rem) {
-    .hero {
-      height: calc(100vh - var(--header-height) - var(--hero-peek));
-      height: calc(100dvh - var(--header-height) - var(--hero-peek));
-      min-height: calc(100vh - var(--header-height) - var(--hero-peek));
-      min-height: calc(100dvh - var(--header-height) - var(--hero-peek));
-      max-height: calc(100vh - var(--header-height) - var(--hero-peek));
-      max-height: calc(100dvh - var(--header-height) - var(--hero-peek));
-    }
   }
 
   .hero__wrap {

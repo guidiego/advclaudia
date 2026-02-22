@@ -62,10 +62,16 @@ const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}?text=${e
   .contact {
     background-color: var(--color-primary);
     color: var(--color-text-on-dark);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .contact__container {
     max-width: 32rem;
+    width: 100%;
   }
 
   .contact__header {
