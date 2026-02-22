@@ -11,14 +11,14 @@
   "seo": {
     "title": "Advogada Especialista em Direito Penal em Mogi das Cruzes",
     "description": "Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
-    "area": "Direito Penal",
+    "area": "Direito Penal e Processo Penal",
     "city": "Mogi das Cruzes"
   },
   "contact": {
-    "whatsappNumber": "5511999999999",
+    "whatsappNumber": "5511922234113",
     "whatsappMessage": "Olá! Gostaria de agendar uma consulta e tirar algumas dúvidas.",
-    "phone": "(11) 99999-9999",
-    "email": "contato@exemplo.com.br",
+    "phone": "(11) 92223-4113",
+    "email": "claudiafreire@adv.oabsp.org.br",
     "city": "Mogi das Cruzes",
     "oab": "OAB/SP 531113",
     "lawyerName": "Dra. Claudia Silva"
@@ -34,8 +34,7 @@
     "bio": [
       "Nascida em 1970, Dra. Cláudia construiu sua trajetória com base em responsabilidade, determinação e compromisso social. Após dedicar-se à criação de suas duas filhas, decidiu iniciar um novo capítulo profissional ao ingressar no curso de Direito, motivada pelas desigualdades e injustiças que observou ao longo da vida. Aprovada no Exame da OAB, inicia sua atuação na advocacia com maturidade, sensibilidade e forte senso de propósito.",
       "Optou pela advocacia criminal por compreender que o Direito Penal exige não apenas conhecimento técnico, mas também humanidade e equilíbrio. Acredita que todo cidadão tem direito a uma defesa justa e qualificada, especialmente aqueles que muitas vezes não são favorecidos pelo sistema. Sua atuação é pautada na ética, no respeito às garantias fundamentais e no compromisso genuíno com a Justiça."
-    ],
-    "ctaText": "Fale comigo pelo WhatsApp"
+    ]
   },
   "areas": {
     "title": "Áreas de Atuação"
@@ -68,14 +67,7 @@
   "contato": {
     "title": "Entre em contato",
     "subtitle": "Sua situação merece uma resposta rápida e profissional. Envie sua mensagem ou fale diretamente pelo WhatsApp para agendar uma consulta.",
-    "formSubmitText": "Solicitar Atendimento",
     "whatsappButtonText": "Falar com a Dra. Claudia.",
-    "formFields": {
-      "name": { "label": "Nome", "placeholder": "Seu nome completo" },
-      "phone": { "label": "Telefone", "placeholder": "(11) 99999-9999" },
-      "email": { "label": "E-mail", "placeholder": "seu@email.com" },
-      "message": { "label": "Mensagem", "placeholder": "Descreva brevemente seu caso..." }
-    },
     "formWhatsappIntro": "Olá! Gostaria de solicitar uma consulta."
   }
 }
