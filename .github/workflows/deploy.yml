@@ -18,8 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Project site: /repo-name/ ; user/org site (*.github.io): /
-      BASE_PATH: ${{ contains(github.event.repository.name, '.github.io') && '/' || format('/{0}/', github.event.repository.name) }}
+      # Custom domain (drclaudiafreire.com) served at root. Use format('/{0}/', github.event.repository.name) for *.github.io project URL.
+      BASE_PATH: '/'
       GITHUB_PAGES: true
       GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
     steps:
