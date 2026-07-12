@@ -10,9 +10,12 @@ interface Props {
   lawyerName?: string;
   phone?: string;
   email?: string;
+  address?: string;
+  openingHours?: string[];
+  sameAs?: string[];
 }
 
-const { title, description, area = "", city = "", lawyerName = "", phone = "", email = "" } = Astro.props;
+const { title, description, area = "", city = "", lawyerName = "", phone = "", email = "", address = "", openingHours = [], sameAs = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const jsonLd = lawyerName
   ? {
@@ -25,6 +28,11 @@ const jsonLd = lawyerName
       ...(area && { serviceType: area }),
       ...(phone && { telephone: phone }),
       ...(email && { email }),
+      ...(address && {
+        address: { "@type": "PostalAddress", streetAddress: address, addressLocality: city, addressRegion: "SP", addressCountry: "BR" },
+      }),
+      ...(openingHours.length > 0 && { openingHours }),
+      ...(sameAs.length > 0 && { sameAs }),
     }
   : null;
 ---
@@ -32,6 +40,13 @@ const jsonLd = lawyerName
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MMRSRRWJ');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
@@ -39,10 +54,6 @@ const jsonLd = lawyerName
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#481217" />
-    <!-- SEO: Advogado(a) [AREA] em [CITY] -->
-    {area && city && (
-      <meta name="keywords" content={`Advogado, Advogada, ${area}, ${city}, consultoria jurídica, escritório de advocacia`} />
-    )}
     <meta name="robots" content="index, follow" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -63,7 +74,7 @@ const jsonLd = lawyerName
       />
     )}
     <!-- LCP: preload hero image so it starts loading before body is parsed -->
-    <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}hero.png`} />
+    <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}hero.webp`} />
     <!-- Fonts: preconnect first; stylesheet loads async (media=print trick) so it doesn't block render -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,6 +88,10 @@ const jsonLd = lawyerName
     <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MMRSRRWJ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />
   </body>

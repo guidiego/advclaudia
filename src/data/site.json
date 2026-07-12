@@ -5,12 +5,13 @@
       { "label": "Sobre", "href": "#about" },
       { "label": "Áreas de Atuação", "href": "#practice-areas" },
       { "label": "Diferenciais", "href": "#differentiators" },
+      { "label": "Perguntas Frequentes", "href": "#faq" },
       { "label": "Contato", "href": "#contact" }
     ]
   },
   "seo": {
-    "title": "Advogada especialista em Direito Penal e Processo Penal em Mogi das Cruzes",
-    "description": "Atendimento personalizado, estratégia jurídica e sigilo absoluto. Consulte agora.",
+    "title": "Advogada Criminalista em Mogi das Cruzes | Claudia Freire — OAB/SP 531113",
+    "description": "Advogada criminalista em Mogi das Cruzes — OAB/SP 531113. Defesa criminal, habeas corpus, flagrante, audiência de custódia e execução penal. Atendimento humanizado e sigilo absoluto. Consulte agora.",
     "area": "Direito Penal e Processo Penal",
     "city": "Mogi das Cruzes"
   },
@@ -21,11 +22,14 @@
     "email": "claudiafreire@adv.oabsp.org.br",
     "city": "Mogi das Cruzes",
     "oab": "OAB/SP 531113",
-    "lawyerName": "Dra. Claudia Silva"
+    "lawyerName": "Dra. Claudia Freire",
+    "address": "Av. Ver. Narciso Yague Guimarães, 624 — Sala 04, Centro Cívico, Mogi das Cruzes — SP, CEP 08780-000",
+    "openingHours": ["Mo-Th 09:00-18:00", "Fr 09:00-17:00"],
+    "sameAs": ["https://www.instagram.com/claudiafreireadvogada"]
   },
   "hero": {
     "headline": "Protegendo direitos com *precisão jurídica*",
-    "subheadline": "Advogada especialista em Direito Penal e Processo Penal em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
+    "subheadline": "Advogada criminalista em Mogi das Cruzes. Atendimento humanizado e compromisso com a sua causa.",
     "ctaText": "Conversar com a advogada",
     "trustBadge": "OAB/SP 531113 • Claudia Freire"
   },
@@ -49,7 +53,7 @@
       },
       {
         "title": "Atualizada e Preparada nas Novas Leis",
-        "description": "Recém-aprovada na OAB, trago conhecimento atualizado das legislações e jurisprudências mais recentes para oferecer estratégias jurídicas modernas e eficazes.",
+        "description": "Trago conhecimento atualizado das legislações e jurisprudências mais recentes, unindo atualização constante a uma visão estratégica para oferecer defesas modernas e eficazes.",
         "icon": "law"
       },
       {
@@ -64,10 +68,40 @@
       }
     ]
   },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "items": [
+      {
+        "question": "Fui preso em flagrante. O que devo fazer?",
+        "answer": "Procure um advogado criminalista imediatamente, antes de prestar qualquer depoimento. Você tem o direito de permanecer em silêncio até que seu advogado esteja presente ou orientando o caso. Entre em contato o quanto antes para que possamos atuar ainda na fase de flagrante e na audiência de custódia."
+      },
+      {
+        "question": "Fui intimado para depor na delegacia. É obrigatório ir sozinho?",
+        "answer": "Não. Você pode e deve comparecer acompanhado de um advogado. O acompanhamento profissional garante que seus direitos sejam respeitados e que suas declarações sejam registradas corretamente."
+      },
+      {
+        "question": "O que é audiência de custódia?",
+        "answer": "É a apresentação da pessoa presa em flagrante a um juiz, em até 24 horas, para avaliar a legalidade da prisão e a necessidade de mantê-la presa ou conceder liberdade provisória. A atuação de um advogado nessa fase é essencial para preservar direitos e buscar a soltura quando cabível."
+      },
+      {
+        "question": "Quanto tempo leva um processo criminal?",
+        "answer": "Varia conforme a complexidade do caso, o tipo de crime e a fase em que se encontra (inquérito, ação penal, execução). Durante a consulta, avalio o seu caso específico e explico com clareza as etapas e prazos esperados."
+      },
+      {
+        "question": "O atendimento é sigiloso?",
+        "answer": "Sim. Todas as informações compartilhadas são tratadas com total sigilo profissional, respeitando a sua privacidade e a confidencialidade exigida pela ética da advocacia."
+      },
+      {
+        "question": "Vocês atendem em Mogi das Cruzes e região?",
+        "answer": "Sim. O escritório fica em Mogi das Cruzes e atende clientes da cidade e região, com atendimento presencial e online, conforme sua necessidade."
+      }
+    ]
+  },
   "contato": {
     "title": "Entre em contato",
     "subtitle": "Sua situação merece uma resposta rápida e profissional. Envie sua mensagem ou fale diretamente pelo WhatsApp para agendar uma consulta.",
     "whatsappButtonText": "Falar com a Dra. Claudia.",
-    "formWhatsappIntro": "Olá! Gostaria de solicitar uma consulta."
+    "formWhatsappIntro": "Olá! Gostaria de solicitar uma consulta.",
+    "addressLabel": "Endereço"
   }
 }

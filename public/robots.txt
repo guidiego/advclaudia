@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://draclaudiafreire.com/sitemap-index.xml

@@ -4,12 +4,13 @@ import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
 import PracticeAreas from "../components/PracticeAreas.astro";
 import Differentiators from "../components/Differentiators.astro";
+import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import Header from "../components/Header.astro";
 import site from "../data/site.json";
 
-const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
+const { seo, contact, hero, sobre, areas, diferenciais, faq, contato, nav } = site;
 ---
 
 <Layout
@@ -20,6 +21,9 @@ const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
   lawyerName={contact.lawyerName}
   phone={contact.phone}
   email={contact.email}
+  address={contact.address}
+  openingHours={contact.openingHours}
+  sameAs={contact.sameAs}
 >
   <Header links={nav.links} />
   <main id="main-content">
@@ -41,6 +45,7 @@ const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
       whatsappMessage={contact.whatsappMessage}
     />
     <Differentiators title={diferenciais.title} items={diferenciais.items} />
+    <FAQ title={faq.title} items={faq.items} />
     <Contact
       title={contato.title}
       subtitle={contato.subtitle}
@@ -49,6 +54,7 @@ const { seo, contact, hero, sobre, areas, diferenciais, contato, nav } = site;
       whatsappMessage={contact.whatsappMessage}
       phone={contact.phone}
       email={contact.email}
+      address={contact.address}
     />
   </main>
   <WhatsAppFloat
