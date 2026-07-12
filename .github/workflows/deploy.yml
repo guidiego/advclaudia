@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Custom domain (drclaudiafreire.com) served at root. Use format('/{0}/', github.event.repository.name) for *.github.io project URL.
+      # Custom domain (draclaudiafreire.com) served at root. Use format('/{0}/', github.event.repository.name) for *.github.io project URL.
       BASE_PATH: '/'
       GITHUB_PAGES: true
       GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
